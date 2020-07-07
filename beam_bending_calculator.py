@@ -18,7 +18,7 @@ if Custom_Emod in yes_list:
     Emod = Emod_input * 1e9
         
 elif Custom_Emod in no_list: 
-    Emod = 200e9
+    Emod = 200e9 
     
 else:
     print('You had one fucking job...')
@@ -64,6 +64,7 @@ def moment_of_intertia_calc(width,thickness):
 
 def deflection(Load,Length,Modulus,MomentofInertia):
     # Simple cantilevered beam with point load simple assumption
+    #as;dkfja;lsdjkfl;asdjf;ladjfl;kdjf
     delta = (Load * Length**3)/(3 * Modulus * MomentofInertia)
     return delta
 
