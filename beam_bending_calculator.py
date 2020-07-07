@@ -57,6 +57,19 @@ else:
     print('You had one fucking job...')
     print('Exiting...Try again with y or n')
     sys.exit()
+
+Custom_Normal_Load = input('Custom normal load?(y/n): ')
+
+if Custom_Normal_Load in yes_list:
+    Normal_Load = float(input('Input your normal load in milliNewtons(10^-3): ')) * 1e-3
+    
+elif Custom_Normal_Load in no_list:
+    Normal_Load = 1.00 * 1e-3
+
+else:
+    print('You had one fucking job...')
+    print('Exiting...Try again with y or n')
+    sys.exit()
     
 def moment_of_intertia_calc(width,thickness):
     I = (width * thickness**3)/12
@@ -64,9 +77,12 @@ def moment_of_intertia_calc(width,thickness):
 
 def deflection(Load,Length,Modulus,MomentofInertia):
     # Simple cantilevered beam with point load simple assumption
-    #as;dkfja;lsdjkfl;asdjf;ladjfl;kdjf
     delta = (Load * Length**3)/(3 * Modulus * MomentofInertia)
     return delta
+
+def friction_coefficient(NormalLoad,FrictionLoad):
+    u = (FrictionLoad * 1e-6)/(NormalLoad * 1e-3)
+    return u
 
 def percent_error_calc(deflection):
     percent = 0.02 / (deflection/1e-6) * 100
@@ -74,10 +90,13 @@ def percent_error_calc(deflection):
 
 I = moment_of_intertia_calc(width, thickness)
 delta = deflection(Friction_Load,length,Emod,I)
+u = friction_coefficient(Normal_Load,Friction_Load)
 percent_error = percent_error_calc(delta)
+
 
 print('Moment of inertia: ', I)
 print('Deflection:' , delta/1e-6, 'microns +/- 0.02 microns')
+print('Coefficent of Friction:', u)
 print('Minimum Percent Error: ', percent_error, '%')
 
     
