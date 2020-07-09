@@ -16,9 +16,7 @@ def moment_of_intertia(Width,Thickness):
     return Inertia
 
 def delta(Friction_Load,Length,Emod,MomentofInertia):
-    total_deflection = (Friction_Load*Length**3)/(24*Emod*Inertia)
-    # double cantilevered beam is approx (1/8) of the single fixed end beam 
-    deflection = total_deflection*(1/8) 
+    deflection = (Friction_Load*Length**3)/(24*Emod*Inertia)
     return deflection
 
 def friction_coefficient(NormalLoad,FrictionLoad):
