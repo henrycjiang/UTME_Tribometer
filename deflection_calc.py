@@ -25,20 +25,20 @@ max_def = 0
 max_para = []
 
 Inertia_Initial = (width_min * thickness_min**3)/12
-min_def = (Friction_Load*length_min**3)/(24*Emod*Inertia_Initial*inertia_factor)
+min_def = ((Friction_Load*length_min**3)/(24*Emod*Inertia_Initial*inertia_factor))*2
 min_para = []
 
 for l in length:
     for w in width:
         for t in thickness:
             Inertia = (w * t**3)/12
-            deflection = (Friction_Load*l**3)/(24*Emod*Inertia*inertia_factor)
+            deflection = ((Friction_Load*l**3)/(24*Emod*Inertia*inertia_factor))*2
             if (deflection >= deflection_min) and (deflection <= deflection_max):
                 print("Deflection Criteria SATISFIED")
                 print("Deflection: ",deflection/1e-3, 'mm')
-                print("  l: ",l/1e-3, 'mm')
-                print("  w: ",w/1e-3, 'mm')
-                print("  t: ",t/1e-3, 'mm')
+                print("  l: ",round(l/1e-3,5), 'mm')
+                print("  w: ",round(w/1e-3,5), 'mm')
+                print("  t: ",round(t/1e-3,5), 'mm')
                 print()
             if deflection > max_def:
                 max_def = deflection
