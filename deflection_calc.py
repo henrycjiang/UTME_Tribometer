@@ -14,6 +14,8 @@ import numpy as np
 
 print()
 print("Friction Load Input: ", Friction_Load/1e-3, 'mN')
+print("Maximum Normal Load: ", Normal_Load/1e-3, 'mN')
+print("Resulting Coefficient of Friction: ", Friction_Load/Normal_Load)
 print()
 print("Deflection Crteria")
 print("  Max Deflection: ",deflection_max/1e-3, 'mm')
