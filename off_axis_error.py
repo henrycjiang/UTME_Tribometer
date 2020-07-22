@@ -10,13 +10,12 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 from matplotlib.ticker import LinearLocator, FormatStrFormatter
 
-def off_axis_calc(Ffriction, Fnormal, alpha, beta):
+def off_axis_calc(Fx, Fy, alpha, beta):
 
     alpha_rad = deg2rad(alpha)
     beta_rad = deg2rad(beta)
     
-    Fx = (Ffriction * cos(alpha_rad)) + (Fnormal * sin(alpha_rad))
-    Fy = (Fnormal * cos(beta_rad)) - (Ffriction * sin(beta_rad))
+    
     mu = (Fx * cos(beta_rad) - Fy * sin(alpha_rad))/(Fy * cos(alpha_rad) + Fx * sin(beta_rad) )
     Error  = ( mu  * cos(beta_rad) - mu**2 * sin(beta_rad) - mu * cos(alpha_rad) - sin(alpha_rad))/( mu * cos(beta_rad) - mu**2 * sin(beta_rad) )
     Error = abs(Error) * 100
@@ -54,6 +53,7 @@ ax.set_zlim(0,80)
 ax.set_xlabel("Alpha")
 ax.set_ylabel("Beta")
 ax.set_zlabel("Percent Error")
+ax.set_title("Percent Error vs Alpha and Beta")
 ax.zaxis.set_major_locator(LinearLocator(10))
 ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
 
