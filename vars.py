@@ -15,9 +15,13 @@
 import numpy as np 
 
 Emod = 68 * 1e9 # GPa to Pa //aluminum
+<<<<<<< HEAD
 Friction_Load = .03 * 1e-3 # mN to N 
+=======
+Friction_Load = 25 * 1e-3 # mN to N 
+>>>>>>> refs/remotes/origin/master
 Normal_Load = 100 * 1e-3 # mN to N
-inertia_factor = 1 # fraction of how much the inertia of the beam would be reduced after drilling holes
+inertia_factor = 1 # fraction of how much the inertia of the beam would remain after drilling holes
 
 length_min = 40 * 1e-3 # mm to m
 length_max = 110 * 1e-3 # mm to m
