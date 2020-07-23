@@ -20,8 +20,8 @@ print("Normal Load: ", Normal_Load/1e-3, 'mN')
 print("Resulting Coefficient of Friction: ", Friction_Load/Normal_Load)
 print()
 print("Deflection Crteria")
-print("  Max Deflection: ",deflection_max/1e-3, 'mm')
-print("  Min Deflection: ",deflection_min/1e-3, 'mm')
+print("  Max Deflection: ",deflection_max_vert/1e-3, 'mm')
+print("  Min Deflection: ",deflection_min_vert/1e-3, 'mm')
 print()
 
 # initialize min and max deflections
@@ -41,7 +41,7 @@ y = []
 for w in width:
     Inertia = (w * t**3)/12
     deflection = (Normal_Load*l**3)/(24*Emod*Inertia*inertia_factor)
-    if (deflection >= deflection_min) and (deflection <= deflection_max):
+    if (deflection >= deflection_min_vert) and (deflection <= deflection_max_vert):
         print("Deflection Criteria SATISFIED")
         print("Deflection: ",deflection/1e-3, 'mm')
         print("  l: ",round(l/1e-3,5), 'mm')
@@ -57,7 +57,7 @@ for w in width:
         min_def = deflection
         min_para = [l,w,t]   
 
-if ((max_def <= deflection_max) and (max_def >= deflection_min)) or ((min_def <= deflection_max) and (min_def >= deflection_min)):
+if ((max_def <= deflection_max_vert) and (max_def >= deflection_min_vert)) or ((min_def <= deflection_max_vert) and (min_def >= deflection_min_vert)):
     print("Deflection Criteria SATISFIED")
 else:
     print("Deflection Criteria NOT SATISFIED")
@@ -74,8 +74,9 @@ print("  t: ",round(min_para[2]/1e-3,4), 'mm')
 print()
 
 plt.plot(x,y,linestyle='--', marker='o', color='b',label='2D model results')
-plt.plot(x_fea_norm,y_fea_norm, linestyle='--', marker='x', color='r',label='3D FEA results')
+plt.plot(x_fea_vert,y_fea_vert, linestyle='--', marker='x', color='r',label='3D FEA results')
 plt.xlabel("Width (mm)")
 plt.ylabel("Deflection (mm)")
+plt.title('Vertical Beam Deflection with Changing Width')
 plt.legend()
 plt.show()     

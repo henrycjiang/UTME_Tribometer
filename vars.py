@@ -32,8 +32,14 @@ length = list(np.arange(length_min,length_max,0.0001))
 width = list(np.arange(width_min,width_max,0.0001))
 thickness = list(np.arange(thickness_min,thickness_max,0.0001))
 
-deflection_min = 0.35 *1e-3 # mm to m 
-deflection_max = 0.45 * 1e-3 # mm to m 
+deflection_min_vert= 0.35 *1e-3 # mm to m 
+deflection_max_vert = 0.45 * 1e-3 # mm to m 
 
-x_fea_norm = [6,6.1,6.2,6.3,6.4,6.5,6.6,6.7,6.8]
-y_fea_norm = [.3547,.3547,.3547,.3547,.3547,.3547,.3547,.3547,.3547]
+deflection_min_hz= 0.09 *1e-3 # mm to m 
+deflection_max_hz = 0.2 * 1e-3 # mm to m 
+
+x_fea_vert = [6,6.1,6.2,6.3,6.4,6.5,6.6,6.7,6.8]
+y_fea_vert = [.3547,.3547,.3547,.3547,.3547,.3547,.3547,.3547,.3547]
+
+x_fea_hz = []
+y_fea_hz = []
