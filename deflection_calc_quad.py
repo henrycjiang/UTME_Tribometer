@@ -1,6 +1,6 @@
-#  File: vars.py
+#  File: defelection_calc_quad.py
 
-#  Description: Calculates permutations of length, width, and thickness of dual cantilever beam that agrees with min and max deflection criteria and friction load
+#  Description: Calculates permutations of length, width, and thickness of quad cantilever beam that agrees with min and max deflection criteria and friction load
 
 #  Name: Irene Lee
 
