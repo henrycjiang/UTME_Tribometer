@@ -73,6 +73,7 @@ print("  w: ",round(min_para[1]/1e-3,4), 'mm')
 print("  t: ",round(min_para[2]/1e-3,4), 'mm')
 print()
 
+#plot won't go through if samples don't meet input deflection criteria
 plt.plot(x,y,linestyle='--', marker='o', color='b',label='2D model results')
 #plt.plot(x_fea_hz,y_fea_hz, linestyle='--', marker='x', color='r',label='3D FEA results')
 plt.xlabel("Width (mm)")

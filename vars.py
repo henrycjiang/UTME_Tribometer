@@ -32,14 +32,18 @@ length = list(np.arange(length_min,length_max,0.0001))
 width = list(np.arange(width_min,width_max,0.0001))
 thickness = list(np.arange(thickness_min,thickness_max,0.0001))
 
+#deflection criteria for vertical beam, normal load
 deflection_min_vert= 0.35 *1e-3 # mm to m 
 deflection_max_vert = 0.45 * 1e-3 # mm to m 
 
+#deflection criteria for horizonal beam, friction load
 deflection_min_hz= 0.09 *1e-3 # mm to m 
 deflection_max_hz = 0.2 * 1e-3 # mm to m 
 
+# x = width and y = deflection FEA results for vertical beam
 x_fea_vert = [6,6.1,6.2,6.3,6.4,6.5,6.6,6.7,6.8]
 y_fea_vert = [.3547,.3547,.3547,.3547,.3547,.3547,.3547,.3547,.3547]
 
+# x = width and y = deflection FEA results for horizontal beam
 x_fea_hz = []
 y_fea_hz = []
