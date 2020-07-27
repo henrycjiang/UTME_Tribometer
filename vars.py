@@ -42,7 +42,7 @@ deflection_max_hz = 0.2 * 1e-3 # mm to m
 
 # x = width and y = deflection FEA results for vertical beam
 x_fea_vert = [6,6.1,6.2,6.3,6.4,6.5,6.6,6.7,6.8]
-y_fea_vert = [.3547,.3547,.3547,.3547,.3547,.3547,.3547,.3547,.3547]
+y_fea_vert = [.3547,0.3712,0.365, 0.3593,0.3532,0.3477,0.3447,0.3368,.3255]
 
 # x = width and y = deflection FEA results for horizontal beam
 x_fea_hz = []
