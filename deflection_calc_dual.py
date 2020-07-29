@@ -119,7 +119,7 @@ x_plot2 = np.arange(6,6.9,.1)
 
 # calculates y-int offset between 2D and 3D model 
 y_off = linReg_2D.intercept_ - linReg_3D.intercept_
-print('y-intercept offset: ',linReg_2D.intercept_)
+print('y-intercept offset: ',y_off)
 
 # error calculations
 difference = []
@@ -141,15 +141,23 @@ print('Min error: ', min(multiplied_list))
 
 #plot won't go through if samples don't meet input deflection criteria
 fig = plt.figure(figsize=(15,8))
+#plotting 2D and 3D data
 plt.plot(x,y,linestyle='--', marker='o', color='b',label='2D model results')
 plt.plot(x_fea_vert,y_fea_vert, linestyle='--', marker='x', color='r',label='3D FEA results')
+#plotting 3D linear regression and equations
 plt.plot(x_plot,lin_reg_func3D(x_plot,linReg_3D.coef_,linReg_3D.intercept_),label='3D Linear Regression')
-plt.text(6.68, .34, 'y = '+ str(round(linReg_3D.coef_[0],4)) +'x' + " + " + str(round(linReg_3D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_3D.score(lin_x,lin_y),4)) , fontsize=15)
+plt.text(6.65, .3, 'y = '+ str(round(linReg_3D.coef_[0],4)) +'x' + " + " + str(round(linReg_3D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_3D.score(lin_x,lin_y),4)) , fontsize=10)
+#plotting 2D linear regression and equations
 plt.plot(x_plot2,lin_reg_func2D(x_plot2,linReg_2D.coef_,linReg_2D.intercept_),label='2D Linear Regression')
-plt.text(6.68, .369, 'y = '+ str(round(linReg_2D.coef_[0],4)) +'x' + " + " + str(round(linReg_2D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_2D.score(lin_x2,lin_y2),4)) , fontsize=15)
-plt.text(6.68, .364, 'y-intercept offset = '+ str(round(y_off,4)), fontsize=15)
+plt.text(6.6, .4, 'y = '+ str(round(linReg_2D.coef_[0],4)) +'x' + " + " + str(round(linReg_2D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_2D.score(lin_x2,lin_y2),4)) , fontsize=10)
+#labeling y-intercept offset on the graph
+plt.text(6.6, .38, 'y-intercept offset = '+ str(round(y_off,4)), fontsize=10)
+#scaling plot
+plt.ylim(0, .45)
+plt.xticks(np.arange(6, 6.9, step=0.1))
+#title and axis labels
 plt.xlabel("Width (mm)")
 plt.ylabel("Deflection (mm)")
-plt.title('Vertical Beam Deflection with Changing Width')
+plt.title('Vertical Beam Deflection with Varying Width')
 plt.legend()
 plt.show() 
