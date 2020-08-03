@@ -35,7 +35,6 @@ min_para = []
 l = length_max
 t = thickness_min
 
-#plt.axis([5.5, 7.5, .09, .12])
 x = []
 y = []
 for w in width:
@@ -73,91 +72,93 @@ print("  w: ",round(min_para[1]/1e-3,4), 'mm')
 print("  t: ",round(min_para[2]/1e-3,4), 'mm')
 print()
 
-# # 3D Linear Regression Analysis
-# linReg_3D = LinearRegression()
+# 3D Linear Regression Analysis
+linReg_3D = LinearRegression()
 
-# lin_x = np.array(x_fea_hz).reshape(-1,1)
-# lin_y = np.array(y_fea_hz)
+lin_x = np.array(x_fea_hz).reshape(-1,1)
+lin_y = np.array(y_fea_hz)
 
-# # fits 3D linear regression
-# linReg_3D.fit(lin_x, lin_y)
-# # print results
-# print('3D Model Regression')
-# print('Coefficient of Determination: ',linReg_3D.score(lin_x,lin_y))
-# print('Slope: ',linReg_3D.coef_[0])
-# print('Intercept: ',linReg_3D.intercept_)
-# print()
+# fits 3D linear regression
+linReg_3D.fit(lin_x, lin_y)
+# print results
+print('3D Model Regression')
+print('Coefficient of Determination: ',linReg_3D.score(lin_x,lin_y))
+print('Slope: ',linReg_3D.coef_[0])
+print('Intercept: ',linReg_3D.intercept_)
+print()
 
-# # linear regression funcion 
-# def lin_reg_func3D(x, m, b):
-#     return m*x + b
+# linear regression funcion 
+def lin_reg_func3D(x, m, b):
+    return m*x + b
 
-# x_plot = np.arange(6,6.9,.1)
+x_plot = np.arange(6,6.9,.1)
+x = x[:9]
+y = y[:9]
+
+# 2D Linear Regression Analysis
+linReg_2D = LinearRegression()
+
+lin_x2 = np.array(x).reshape(-1,1)
+lin_y2 = np.array(y)
+
+# fits 2D linear regression
+linReg_2D.fit(lin_x2, lin_y2)
+# print results
+print('2D Model Regression')
+print('Coefficient of Determination: ',linReg_2D.score(lin_x2,lin_y2))
+print('Slope: ',linReg_2D.coef_[0])
+print('Intercept: ',linReg_2D.intercept_)
+print()
+
+# linear regression funcion 
+def lin_reg_func2D(x2, m2, b2):
+    return m2*x2 + b2
+
+x_plot2 = np.arange(6,6.9,.1)
+
+# calculates y-int offset between 2D and 3D model 
+y_off = linReg_2D.intercept_ - linReg_3D.intercept_
+print('y-intercept offset: ',linReg_2D.intercept_)
+
+# error calculations
+difference = []
+zip_object = zip(y, y_fea_hz)
+for y_i, y_fea_hz_i in zip_object:
+    difference.append(y_i-y_fea_hz_i)
+
+div = []
+zip_object = zip(difference, y_fea_hz)
+for difference_i, y_fea_hz_i in zip_object:
+    div.append(difference_i/y_fea_hz_i)
+
+res =  [abs(ele) for ele in div] 
+multiplied_list = [element * 100 for element in res]
+
+print('Max error: ', max(multiplied_list))
+print('Min error: ', min(multiplied_list))
 
 
-# # 2D Linear Regression Analysis
-# linReg_2D = LinearRegression()
+#plot won't go through if samples don't meet input deflection criteria
+fig = plt.figure(figsize=(15,8))
+#plotting 2D and 3D data
+plt.plot(x,y,linestyle='--', marker='o', color='b',label='2D model results')
+plt.plot(x_fea_hz,y_fea_hz, linestyle='--', marker='x', color='r',label='3D FEA results')
+#plotting 3D linear regression and equations
+plt.plot(x_plot,lin_reg_func3D(x_plot,linReg_3D.coef_,linReg_3D.intercept_),label='3D Linear Regression')
+plt.text(6.68, .23, 'y = '+ str(round(linReg_3D.coef_[0],4)) +'x' + " + " + str(round(linReg_3D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_3D.score(lin_x,lin_y),4)) , fontsize=15)
+#plotting 2D linear regression and equations
+plt.plot(x_plot2,lin_reg_func2D(x_plot2,linReg_2D.coef_,linReg_2D.intercept_),label='2D Linear Regression')
+plt.text(6.68, .12, 'y = '+ str(round(linReg_2D.coef_[0],4)) +'x' + " + " + str(round(linReg_2D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_2D.score(lin_x2,lin_y2),4)) , fontsize=15)
+#labeling y-intercept offset on the graph
+plt.text(6.68, .21, 'y-intercept offset = '+ str(round(y_off,4)), fontsize=15)
+#scaling plot
+plt.ylim(0, .4)
+plt.xticks(np.arange(6, 6.9, step=0.1))
+#title and axis labels
+plt.xlabel("Width (mm)", fontsize=10)
+plt.ylabel("Deflection (mm)", fontsize=10)
+plt.title('Frictional Load Beam Deflection with Varying Width', fontsize=15)
+plt.legend()
+plt.show()
 
-# lin_x2 = np.array(x).reshape(-1,1)
-# lin_y2 = np.array(y)
-
-# # fits 2D linear regression
-# linReg_2D.fit(lin_x2, lin_y2)
-# # print results
-# print('2D Model Regression')
-# print('Coefficient of Determination: ',linReg_2D.score(lin_x2,lin_y2))
-# print('Slope: ',linReg_2D.coef_[0])
-# print('Intercept: ',linReg_2D.intercept_)
-# print()
-
-# # linear regression funcion 
-# def lin_reg_func2D(x2, m2, b2):
-#     return m2*x2 + b2
-
-# x_plot2 = np.arange(6,6.9,.1)
-
-# # calculates y-int offset between 2D and 3D model 
-# y_off = linReg_2D.intercept_ - linReg_3D.intercept_
-# print('y-intercept offset: ',linReg_2D.intercept_)
-
-# # error calculations
-# difference = []
-# zip_object = zip(y, y_fea_hz)
-# for y_i, y_fea_hz_i in zip_object:
-#     difference.append(y_i-y_fea_hz_i)
-
-# div = []
-# zip_object = zip(difference, y_fea_hz)
-# for difference_i, y_fea_hz_i in zip_object:
-#     div.append(difference_i/y_fea_hz_i)
-
-# res =  [abs(ele) for ele in div] 
-# multiplied_list = [element * 100 for element in res]
-
-# print('Max error: ', max(multiplied_list))
-# print('Min error: ', min(multiplied_list))
-
-
-# #plot won't go through if samples don't meet input deflection criteria
-# fig = plt.figure(figsize=(15,8))
-# #plotting 2D and 3D data
-# plt.plot(x,y,linestyle='--', marker='o', color='b',label='2D model results')
-# plt.plot(x_fea_hz,x_fea_hz, linestyle='--', marker='x', color='r',label='3D FEA results')
-# #plotting 3D linear regression and equations
-# plt.plot(x_plot,lin_reg_func3D(x_plot,linReg_3D.coef_,linReg_3D.intercept_),label='3D Linear Regression')
-# plt.text(6.68, .34, 'y = '+ str(round(linReg_3D.coef_[0],4)) +'x' + " + " + str(round(linReg_3D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_3D.score(lin_x,lin_y),4)) , fontsize=15)
-# #plotting 2D linear regression and equations
-# plt.plot(x_plot2,lin_reg_func2D(x_plot2,linReg_2D.coef_,linReg_2D.intercept_),label='2D Linear Regression')
-# plt.text(6.68, .369, 'y = '+ str(round(linReg_2D.coef_[0],4)) +'x' + " + " + str(round(linReg_2D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_2D.score(lin_x2,lin_y2),4)) , fontsize=15)
-# #labeling y-intercept offset on the graph
-# plt.text(6.68, .364, 'y-intercept offset = '+ str(round(y_off,4)), fontsize=15)
-# #scaling plot
-# plt.ylim(0, .45)
-# plt.xticks(np.arange(6, 6.9, step=0.1))
-# #title and axis labels
-# plt.xlabel("Width (mm)")
-# plt.ylabel("Deflection (mm)")
-# plt.title('Horizontal Beam Deflection with Varying Width')
-# plt.legend()
-# plt.show() 
 

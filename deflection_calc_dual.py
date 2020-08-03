@@ -35,7 +35,6 @@ min_para = []
 l = length_max
 t = thickness_min
 
-#plt.axis([5.5, 7.5, .09, .12])
 x = []
 y = []
 for w in width:
@@ -146,18 +145,18 @@ plt.plot(x,y,linestyle='--', marker='o', color='b',label='2D model results')
 plt.plot(x_fea_vert,y_fea_vert, linestyle='--', marker='x', color='r',label='3D FEA results')
 #plotting 3D linear regression and equations
 plt.plot(x_plot,lin_reg_func3D(x_plot,linReg_3D.coef_,linReg_3D.intercept_),label='3D Linear Regression')
-plt.text(6.65, .3, 'y = '+ str(round(linReg_3D.coef_[0],4)) +'x' + " + " + str(round(linReg_3D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_3D.score(lin_x,lin_y),4)) , fontsize=10)
+plt.text(6.65, .28, 'y = '+ str(round(linReg_3D.coef_[0],4)) +'x' + " + " + str(round(linReg_3D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_3D.score(lin_x,lin_y),4)) , fontsize=13)
 #plotting 2D linear regression and equations
 plt.plot(x_plot2,lin_reg_func2D(x_plot2,linReg_2D.coef_,linReg_2D.intercept_),label='2D Linear Regression')
-plt.text(6.6, .4, 'y = '+ str(round(linReg_2D.coef_[0],4)) +'x' + " + " + str(round(linReg_2D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_2D.score(lin_x2,lin_y2),4)) , fontsize=10)
+plt.text(6.5, .41, 'y = '+ str(round(linReg_2D.coef_[0],4)) +'x' + " + " + str(round(linReg_2D.intercept_,4)) +'\n$R^2$ = ' + str(round(linReg_2D.score(lin_x2,lin_y2),4)) , fontsize=13)
 #labeling y-intercept offset on the graph
-plt.text(6.6, .38, 'y-intercept offset = '+ str(round(y_off,4)), fontsize=10)
+plt.text(6.5, .39, 'y-intercept offset = '+ str(round(y_off,4)), fontsize=13)
 #scaling plot
 plt.ylim(0, .45)
 plt.xticks(np.arange(6, 6.9, step=0.1))
 #title and axis labels
-plt.xlabel("Width (mm)")
-plt.ylabel("Deflection (mm)")
-plt.title('Vertical Beam Deflection with Varying Width')
+plt.xlabel("Width (mm)", fontsize=10)
+plt.ylabel("Deflection (mm)", fontsize=10)
+plt.title('Normal Load Beam Deflection with Varying Width', fontsize=15)
 plt.legend()
 plt.show() 
