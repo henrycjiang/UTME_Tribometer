@@ -19,8 +19,8 @@ Friction_Load = 25 * 1e-3 # mN to N
 Normal_Load = 100 * 1e-3 # mN to N
 inertia_factor = .6 # fraction of how much the inertia of the beam would remain after drilling holes
 
-length_min = 100 * 1e-3 # mm to m
-length_max = 100 * 1e-3 # mm to m
+length_min = 140 * 1e-3 # mm to m
+length_max = 150 * 1e-3 # mm to m
 
 width_min = 6 * 1e-3 # mm to m
 width_max = 8 * 1e-3 # mm to m
@@ -37,8 +37,8 @@ deflection_min_vert= 0.35 *1e-3 # mm to m
 deflection_max_vert = 0.45 * 1e-3 # mm to m 
 
 #deflection criteria for horizonal beam, friction load
-deflection_min_hz= 0.09 *1e-3 # mm to m 
-deflection_max_hz = 0.2 * 1e-3 # mm to m 
+deflection_min_hz= 0.15 *1e-3 # mm to m 
+deflection_max_hz = 0.25 * 1e-3 # mm to m 
 
 # x = width and y = deflection FEA results for vertical beam
 x_fea_vert = [6,6.1,6.2,6.3,6.4,6.5,6.6,6.7,6.8]
